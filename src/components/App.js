@@ -1,24 +1,32 @@
 import { useState } from 'react';
 import logo from './assets/logo.svg';
-import search from './assets/search.svg';
-import ModalSearch from './ModalSearch';
 
 import data from './data/stays.json';
 import { useEffect } from 'react';
+import Search from './Search';
 
 function App() {
-  const [open, setOpen] = useState(false);
   const [rooms, setRooms] = useState([]);
+  const [chanedRooms, setChangedRooms] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await data;
 
       setRooms(res);
+      setChangedRooms(res);
     };
 
     fetchData();
   }, []);
+
+  const filterRooms = (city, guests) => {
+    const filterArr = rooms.filter((room) => {
+      return room.city === city && room.maxGuests >= guests;
+    });
+
+    setChangedRooms([...filterArr]);
+  };
 
   return (
     <div className="page">
@@ -28,16 +36,16 @@ function App() {
             <img src={logo} alt="" className="logo" />
           </div>
 
-          <div className="input-container" onClick={() => setOpen(true)}>
-            <div className="header__input header__input--location" />
-            <div type="text" className="header__input header__input--guest" />
-            <button className="header__button">
-              <img src={search} alt="" className="header__button--first" />
-            </button>
-          </div>
-
-          <ModalSearch open={open} setOpen={setOpen} rooms={rooms} setRooms={setRooms}/>
+          <Search rooms={rooms} setRooms={setRooms} filterRooms={filterRooms} />
         </header>
+
+        <main className="main">
+          <div className="main__top">
+            <h1 className="main__title">Stays in Finland</h1>
+
+            <p className='main__count'>{chanedRooms.length}+ stays</p>
+          </div>
+        </main>
       </div>
     </div>
   );
