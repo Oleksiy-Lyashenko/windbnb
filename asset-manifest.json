@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/windbnb/static/css/main.01d1329a.css",
+    "main.css": "/windbnb/static/css/main.031b0a00.css",
     "main.js": "/windbnb/static/js/main.d807baeb.js",
     "static/js/787.09a84bc1.chunk.js": "/windbnb/static/js/787.09a84bc1.chunk.js",
     "static/media/logo.svg": "/windbnb/static/media/logo.beef9462a899fe60cb52edfd446e26ef.svg",
@@ -9,12 +9,12 @@
     "static/media/pin.svg": "/windbnb/static/media/pin.e1416c43d7ce6cabc0ad0c6bb8fbf08e.svg",
     "static/media/star.svg": "/windbnb/static/media/star.aa1b5a4cb2296ec3f44a28ab279af739.svg",
     "static/media/close.svg": "/windbnb/static/media/close.a8412e4938d2a0e05e27c9781b920f75.svg",
-    "main.01d1329a.css.map": "/windbnb/static/css/main.01d1329a.css.map",
+    "main.031b0a00.css.map": "/windbnb/static/css/main.031b0a00.css.map",
     "main.d807baeb.js.map": "/windbnb/static/js/main.d807baeb.js.map",
     "787.09a84bc1.chunk.js.map": "/windbnb/static/js/787.09a84bc1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.01d1329a.css",
+    "static/css/main.031b0a00.css",
     "static/js/main.d807baeb.js"
   ]
 }
