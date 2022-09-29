@@ -22,6 +22,11 @@ code {
   position: relative;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 12px;
+
+  @include onBigDesktop {
+    padding: 0;
+  }
 }
 
 .header {
@@ -30,8 +35,24 @@ code {
   justify-content: space-between;
   align-items: center;
   padding-top: 32px;
+  flex-direction: column;
+  row-gap: 30px;
 
-  margin-bottom: 60px;
+  margin-bottom: 37px;
+
+  @include onPhone {
+    flex-direction: row;
+
+    margin-bottom: 60px;
+  }
+
+  &__logo-container {
+    align-self: start;
+
+    @include onPhone {
+      align-self: center;
+    }
+  }
 
   &__input {
     width: 100%;
@@ -47,16 +68,21 @@ code {
       border-bottom-left-radius: 16px;
 
       border-right: none;
+
+      &--mobile {
+        border-bottom-left-radius: 0;
+      }
     }
   }
 
   &__button {
-    border: none;
+    align-items: center;
     height: 55px;
     padding: 0 16px;
 
     background-color: transparent;
-
+  
+    border: none;
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
     border-right: 1px solid #f2f2f2;
@@ -88,26 +114,68 @@ code {
         contrast(100%);
       margin-right: 3px;
     }
+
+    &--hidden {
+      display: none;
+
+      @include onPhone {
+        display: flex;
+      }
+    }
+
+    &--mobile {
+      position: absolute;
+      bottom: 24px;
+      left: 40%;
+      padding: 15px 25px;
+
+      border-radius: 16px;
+
+      @include onPhone {
+        display: none;
+      }
+    }
   }
 }
 
 .input-container {
-  // border: 1px solid #f2f2f2;
   box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.1);
   border-radius: 16px;
   display: flex;
-  max-width: 360px;
+  max-width: max-content;
   width: 100%;
 
   cursor: pointer;
 
-  // transition: max-width 0.5s;
-
   &__open {
     max-width: inherit;
-    margin-top: 100px;
-
     margin-bottom: 42px;
+  }
+
+  &--mobile {
+    flex-direction: column;
+    margin-top: 16px;
+
+    @include onPhone {
+      margin-top: 100px;
+      flex-direction: row;
+    }
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 16px 0;
+
+    @include onPhone {
+      display: none;
+    }
+  }
+
+  &__close {
+    cursor: pointer;
   }
 }
 
@@ -132,19 +200,27 @@ code {
   &__content {
     position: absolute;
     width: 100vw;
-    height: 460px;
+    height: 70vh;
     left: 0;
 
     background-color: #fff;
-
     transform: translateY(-100%);
-
     transition: transform 0.5s;
+
+    @include onPhone {
+      height: 460px;
+    }
 
     &--open {
       transform: translateY(0%);
 
       transition: transform 0.5s;
+    }
+
+    &--mobile {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
   }
 
@@ -169,6 +245,8 @@ code {
   }
 
   &__title {
+    display: block;
+    white-space: nowrap;
     font-weight: 400;
     font-size: 14px;
 
@@ -216,8 +294,11 @@ code {
 }
 
 .add-guest {
-  margin-left: 47%;
   font-size: 14px;
+
+  @include onPhone {
+    margin-left: 47%;
+  }
 
   &__block {
     padding-top: 42px;
@@ -267,10 +348,35 @@ code {
 
   &__bottom {
     display: flex;
-    // justify-content: space-between;
     flex-wrap: wrap;
+    justify-content: center;
     column-gap: 30px;
     row-gap: 40px;
+
+    @include onBigPhone {
+      column-gap: 10px;
+      // row-gap: 30px;
+      justify-content: space-between;
+    }
+
+    @include onTab {
+      column-gap: 10px;
+      row-gap: 20px;
+    }
+
+    @include onDesktop {
+      column-gap: 30px;
+      row-gap: 40px;
+    }
+
+    @include onBigDesktop {
+      column-gap: 30px;
+      row-gap: 40px;
+    }
+
+    @include onDesktop {
+      // justify-content: start;
+    }
   }
 
   &__title {
@@ -288,8 +394,35 @@ code {
 
 .room {
   max-width: 380px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+
+  @include onBigPhone {
+    max-width: 280px;
+  }
+
+  @include onTab {
+    max-width: 350px;
+  }
+
+  @include onSmallDesktop {
+    max-width: 290px;
+  }
+
+  @include onDesktop {
+    max-width: 320px;
+  }
+
+  @include onBigDesktop {
+    max-width: 380px;
+  }
 
   &__container-photo {
+    flex: auto;
     width: 100%;
     max-height: 260px;
     height: 100%;
@@ -330,9 +463,13 @@ code {
     border-radius: 12px;
 
     font-weight: 700;
-    font-size: 12px;
+    font-size: 9px;
     text-transform: uppercase;
     color: #4f4f4f;
+
+    @include onTab {
+      font-size: 12px;
+    }
   }
 
   &__rating {
@@ -346,5 +483,15 @@ code {
     margin-right: 4px;
 
     filter: invert(59%) sepia(46%) saturate(3564%) hue-rotate(324deg) brightness(94%) contrast(95%);
+  }
+
+  &__describe {
+    margin: 0;
+    font-weight: 600;
+    font-size: 14px;
+
+    @include onSmallDesktop {
+      font-size: 16px;
+    }
   }
 }

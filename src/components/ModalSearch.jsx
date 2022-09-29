@@ -2,6 +2,8 @@ import classNames from 'classnames';
 
 import search from './assets/search.svg';
 import pin from './assets/pin.svg';
+import close from './assets/close.svg';
+
 import { useState } from 'react';
 
 export default function ModalSearch({
@@ -48,7 +50,9 @@ export default function ModalSearch({
     setOpen(false);
     setOpenGuests(false);
 
-    filterRooms(choosenCity, countOfGuests);
+    if (choosenCity !== '') {
+      filterRooms(choosenCity, countOfGuests);
+    }
   };
 
   const clickOnFieldCity = () => {
@@ -74,11 +78,24 @@ export default function ModalSearch({
           'modal-search__content--open': open,
         })}>
         <div className="wrapper">
-          <div className="input-container input-container__open">
+          <div className="input-container__top">
+            <span>Edit your search</span>
+            <img
+              src={close}
+              alt=""
+              className="input-container__close"
+              onClick={clickOnSearchButton}
+            />
+          </div>
+
+          <div className="input-container input-container__open input-container--mobile">
             <div
-              className={classNames('header__input header__input--location modal-search__input', {
-                'modal-search__input--open': openCity,
-              })}
+              className={classNames(
+                'header__input header__input--location header__input--location--mobile  modal-search__input',
+                {
+                  'modal-search__input--open': openCity,
+                },
+              )}
               onClick={clickOnFieldCity}>
               <span className="modal-search__sign">location</span>
 
@@ -92,7 +109,7 @@ export default function ModalSearch({
             </div>
             <div
               type="text"
-              className={classNames('header__input header__input--location modal-search__input', {
+              className={classNames('header__input modal-search__input', {
                 'modal-search__input--open': openGuests,
               })}
               onClick={clickOnFieldGuests}>
@@ -105,7 +122,9 @@ export default function ModalSearch({
                 <span className="modal-search__title">Add guests</span>
               )}
             </div>
-            <button className="header__button header__button--open" onClick={clickOnSearchButton}>
+            <button
+              className="header__button header__button--open header__button--hidden"
+              onClick={clickOnSearchButton}>
               <img src={search} alt="" className="header__button--search" />
               Search
             </button>
@@ -123,7 +142,7 @@ export default function ModalSearch({
           )}
 
           {openGuests && (
-            <div className="add-guest">
+            <div className="add-guest add-guest--mobile">
               <div className="add-guest__block">
                 <p className="add-guest__title">Adults</p>
                 <p className="add-guest__subtitle">Ages 13 or above</p>
@@ -154,6 +173,13 @@ export default function ModalSearch({
             </div>
           )}
         </div>
+
+        <button
+          className="header__button header__button--open header__button--mobile"
+          onClick={clickOnSearchButton}>
+          <img src={search} alt="" className="header__button--search" />
+          Search
+        </button>
       </div>
     </div>
   );
